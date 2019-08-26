@@ -18,7 +18,7 @@ namespace Testapp2Api.Controllers
         [HttpPost]
         public Complain Post([FromBody] Complain complainData)
         {
-
+            //model data
             return complainData;
         }
     }

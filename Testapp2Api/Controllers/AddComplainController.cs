@@ -14,7 +14,28 @@ namespace Testapp2Api.Controllers
     [ApiController]
     public class AddComplainController : ControllerBase
     {
-        
+
+        //db
+        private dbContext _context;
+        public AddComplainController(dbContext context)
+        {
+            _context = context;
+        }
+
+        [HttpGet]
+        public Complain GetComplain()
+        {
+            Complain cmp = new Complain
+            {
+                    ComplainerName = "kelum",
+	                houseNo=656,
+	                complain="dsddscscdsc"
+            };
+            this._context.complain.Add(cmp);
+            this._context.SaveChanges();
+            return cmp;
+        }
+
         [HttpPost]
         public Complain Post([FromBody] Complain complainData)
         {

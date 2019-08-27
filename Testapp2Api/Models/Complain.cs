@@ -7,7 +7,7 @@ namespace Testapp2Api.Models
 {
     public class Complain
     {
-        public String name;
+        public String ComplainerName;
         public int houseNo;
         public String complain;
     }

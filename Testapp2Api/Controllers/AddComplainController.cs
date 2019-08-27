@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Testapp2Api.Models;
 
 namespace Testapp2Api.Controllers
@@ -37,10 +38,32 @@ namespace Testapp2Api.Controllers
         }
 
         [HttpPost]
-        public Complain Post([FromBody] Complain complainData)
+        public Resp Post([FromBody] Complain complainData)
         {
-            //model data
-            return complainData;
+            try
+            {
+                EntityEntry<Complain> obj = this._context.complain.Add(complainData);
+                this._context.SaveChanges();
+
+                Resp R = new Resp
+                {
+                    state = true,
+                    msg="Complain Registered!"
+                };
+                return R;
+            }
+            catch (Exception e1)
+            {
+
+
+                Resp R = new Resp
+                {
+                    state = false,
+                    msg = "Error!"
+                };
+                return R;
+
+            }
         }
     }
 }
